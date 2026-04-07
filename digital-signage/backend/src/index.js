@@ -10,6 +10,11 @@ const authRoutes = require('./routes/authRoutes');
 const contentRoutes = require('./routes/contentRoutes');
 const screenRoutes = require('./routes/screenRoutes');
 const playlistRoutes = require('./routes/playlistRoutes');
+const scheduleRoutes = require('./routes/scheduleRoutes');
+const templateRoutes = require('./routes/templateRoutes');
+const screenGroupRoutes = require('./routes/screenGroupRoutes');
+const analyticsRoutes = require('./routes/analyticsRoutes');
+const deviceRoutes = require('./routes/deviceRoutes');
 
 // Conectar ao banco de dados
 connectDB();
@@ -35,11 +40,19 @@ if (!fs.existsSync('./uploads')) {
   fs.mkdirSync('./uploads');
 }
 
+// Disponibilizar io para os controllers
+app.set('io', io);
+
 // Rotas
 app.use('/api/auth', authRoutes);
 app.use('/api/content', contentRoutes);
 app.use('/api/screens', screenRoutes);
 app.use('/api/playlists', playlistRoutes);
+app.use('/api/schedules', scheduleRoutes);
+app.use('/api/templates', templateRoutes);
+app.use('/api/screen-groups', screenGroupRoutes);
+app.use('/api/analytics', analyticsRoutes);
+app.use('/api/devices', deviceRoutes);
 
 // Rota de saúde
 app.get('/api/health', (req, res) => {
@@ -50,12 +63,15 @@ app.get('/api/health', (req, res) => {
 io.on('connection', (socket) => {
   console.log('Dispositivo conectado:', socket.id);
 
+  // Registro por deviceId
   socket.on('register-device', (data) => {
     const { deviceId } = data;
     socket.join(`device:${deviceId}`);
+    socket.join(`screen:${deviceId}`);
     console.log(`Dispositivo ${deviceId} registrado no socket ${socket.id}`);
   });
 
+  // Heartbeat dos dispositivos
   socket.on('heartbeat', async (data) => {
     const { deviceId } = data;
     // Emitir confirmação para o dispositivo
@@ -63,6 +79,12 @@ io.on('connection', (socket) => {
       timestamp: new Date(),
       status: 'received'
     });
+  });
+
+  // Comando remoto do dashboard para dispositivo
+  socket.on('send-command', (data) => {
+    const { deviceId, command, params } = data;
+    io.to(`device:${deviceId}`).emit('command', { command, params });
   });
 
   socket.on('disconnect', () => {

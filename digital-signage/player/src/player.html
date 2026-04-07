@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OptiSigns Player</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #000;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      overflow: hidden;
+      width: 100vw;
+      height: 100vh;
+    }
+
+    #app {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* Tela de configuração inicial */
+    #setup-screen {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      padding: 40px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      border-radius: 10px;
+      max-width: 500px;
+    }
+
+    #setup-screen h1 {
+      font-size: 2em;
+      margin-bottom: 20px;
+    }
+
+    .form-group {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .form-group label {
+      font-weight: bold;
+    }
+
+    .form-group input {
+      padding: 12px;
+      border: none;
+      border-radius: 5px;
+      font-size: 1em;
+    }
+
+    button {
+      padding: 12px 30px;
+      background: #fff;
+      color: #667eea;
+      border: none;
+      border-radius: 5px;
+      font-size: 1em;
+      cursor: pointer;
+      font-weight: bold;
+      transition: transform 0.2s;
+    }
+
+    button:hover {
+      transform: scale(1.05);
+    }
+
+    button.secondary {
+      background: transparent;
+      color: #fff;
+      border: 2px solid #fff;
+    }
+
+    /* Player container */
+    #player-container {
+      display: none;
+      width: 100%;
+      height: 100%;
+    }
+
+    /* Zonas do template */
+    .zone {
+      position: absolute;
+      overflow: hidden;
+    }
+
+    .zone video,
+    .zone img,
+    .zone iframe {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* Status bar */
+    #status-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(0, 0, 0, 0.8);
+      padding: 10px 20px;
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.8em;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    #status-bar.visible {
+      opacity: 1;
+    }
+
+    /* Loading spinner */
+    .spinner {
+      border: 4px solid rgba(255, 255, 255, 0.3);
+      border-top: 4px solid #fff;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    /* Error message */
+    .error-message {
+      background: rgba(255, 0, 0, 0.8);
+      padding: 20px;
+      border-radius: 10px;
+      text-align: center;
+    }
+
+    /* Hidden utility */
+    .hidden {
+      display: none !important;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <!-- Tela de configuração -->
+    <div id="setup-screen">
+      <h1>🖥️ OptiSigns Player</h1>
+      <div class="form-group">
+        <label for="server-url">URL do Servidor:</label>
+        <input type="url" id="server-url" placeholder="http://localhost:5000" value="http://localhost:5000">
+      </div>
+      <div class="form-group">
+        <label for="activation-code">Código de Ativação:</label>
+        <input type="text" id="activation-code" placeholder="Digite o código de ativação">
+      </div>
+      <button id="btn-connect">Conectar</button>
+      <button id="btn-offline" class="secondary">Modo Offline</button>
+    </div>
+
+    <!-- Player Container -->
+    <div id="player-container">
+      <div id="content-zones"></div>
+    </div>
+  </div>
+
+  <!-- Status Bar -->
+  <div id="status-bar" class="hidden">
+    <span id="status-device">Device: --</span>
+    <span id="status-content">Content: --</span>
+    <span id="status-connection">Connection: --</span>
+    <span id="status-time"></span>
+  </div>
+
+  <script src="renderer.js"></script>
+</body>
+</html>
