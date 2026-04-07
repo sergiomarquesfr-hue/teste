@@ -1,204 +1,41 @@
 ```
 # Dependencies
 node_modules/
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
 
 # Environment variables
 .env
 .env.local
-.env.*
-
-# Build outputs
-dist/
-build/
-coverage/
-
-# Logs
-*.log
-
-# OS generated files
-.DS_Store
-Thumbs.db
+*.env.*
 
 # IDE files
 .vscode/
 .idea/
 *.swp
 *.swo
-*.tmp
 
-# Python related (if any Python parts exist)
+# Logs
+*.log
+
+# Build artifacts
+dist/
+build/
+target/
+
+# Python cache
 __pycache__/
 *.pyc
 *.pyo
 *.pyd
-.Python
-env/
-venv/
-.venv/
-pip-log.txt
-pip-delete-this-directory.txt
-*.so
-.coverage
-.coverage.*
-.cache
-nosetests.xml
-coverage.xml
-*.cover
-*.db
-*.db-journal
-
-# Compiled and binary files
-*.exe
-*.dll
-*.so
-*.dylib
-
-# Runtime data
-pids
-*.pid
-*.seed
-*.pid.lock
-
-# Coverage directory used by tools like istanbul
-lib-cov
-*.lcov
-
-# Grunt intermediate storage (https://gruntjs.com/creating-plugins#storing-task-files)
-.grunt
-
-# Bower dependency directory (https://bower.io/)
-bower_components
-
-# node-waf configuration
-.lock-wscript
-
-# Compiled binary addons (https://nodejs.org/api/addons.html)
-build/Release
-
-# Dependency directories
-node_modules/
-jspm_packages/
-
-# Typescript v1, please adjust folder to your typescript version
-src/defs.d.ts
-
-# Optional npm cache directory
-.npm
-
-# Optional eslint cache
-.eslintcache
-
-# Microbundle cache
-.rpt2_cache/
-.rts2_cache_cjs/
-.rts2_cache_es/
-.rts2_cache_umd/
-
-# Optional REPL history
-.node_repl_history
-
-# Output of 'npm pack'
-*.tgz
-
-# Yarn Integrity file
-.yarn-integrity
-
-# dotenv environment variables file
-.env.test
-
-# parcel-bundler placeholders
-.parcel-cache
-
-# Next.js build output
-.next
-
-# Nuxt.js build output
-.nuxt
-
-# vuepress build output
-.vuepress/dist
-
-# Serverless directories
-.serverless/
-
-# FuseBox cache
-.fusebox/
-
-# DynamoDB Local files
-.dynamodb/
-
-# TernJS port file
-.tern-port
-
-# Stores VSCode versions used for testing VSCode extensions
-.vscode-test
-
-# yarn v2
-.yarn/cache
-.yarn/unplugged
-.yarn/build-state.yml
-.yarn/install-state.gz
-.pnp.*
-
-# VitePress cache
-.vitepress/cache
 
 # Temporary files
 *.tmp
-*.temp
 
-# Database files
-*.db
-*.db-journal
+# OS generated files
+.DS_Store
+Thumbs.db
 
-# Compressed files
-*.zip
-*.gz
-*.tar
-*.tgz
-*.bz2
-*.xz
-*.7z
-*.rar
-*.zst
-*.lz4
-*.lzh
-*.cab
-*.arj
-*.rpm
-*.deb
-*.Z
-*.lz
-*.lzo
-*.tar.gz
-*.tar.bz2
-*.tar.xz
-*.tar.zst
-
-# MyPy cache
-.mypy_cache/
-.dmypy.json
-dmypy.json
-
-# PyTest cache
-.pytest_cache/
-
-# Gradle
-.gradle/
-build/
-
-# Maven
-target/
-
-# Java class files
-*.class
-
-# C/C++ compiled files
-*.o
-*.a
-*.obj
-*.out
+# Coverage reports
+coverage/
+htmlcov/
+.coverage
 ```
